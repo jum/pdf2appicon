@@ -55,8 +55,8 @@ let contents = Contents(images: [
 ], info: Info(version: 1, author: "pdf2appicon"))
 
 command(
-	Option("page", 1, description: "page to render"),
-	Flag("preserveaspectratio", description: "preserve the aspect ratio in the output", default: true),
+	Option("page", default: 1, description: "page to render"),
+	Flag("preserveaspectratio", default: true, description: "preserve the aspect ratio in the output"),
 	Argument<String>("pdfin", description: "The PDF input file"),
 	Argument<String>("outdir", description: "Destination dir")
 ) { (pageno, preserveaspectratio, pdfin, outdir) throws  in
