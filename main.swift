@@ -76,7 +76,7 @@ command(
 				Scanner(string: String(imFmt.scale)).scanDouble(&scale)
 				let size = CGSize(width: width*scale, height: height*scale)
 				let smallPageRect = page.getBoxRect(.cropBox)
-				let cspace = NSCalibratedRGBColorSpace
+				let cspace = NSColorSpaceName.calibratedRGB
 				let image = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(size.width), pixelsHigh: Int(size.height), bitsPerSample: 8, samplesPerPixel: 3, hasAlpha: false, isPlanar: false, colorSpaceName: cspace, bytesPerRow: 0, bitsPerPixel: 32)!
 				let destRect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
 				let pdfScale = size.width/smallPageRect.size.width
@@ -90,7 +90,7 @@ command(
 				let cgctx = ctx.cgContext
 				cgctx.concatenate(drawingTransform)
 				cgctx.drawPDFPage(page)
-				if let data = image.representation(using: NSPNGFileType, properties: [:]) {
+				if let data = image.representation(using: NSBitmapImageRep.FileType.png, properties: [:]) {
 					let outurl = URL(fileURLWithPath: "\(outdir)/AppIcon.appiconset/\(imFmt.filename)")
 					try data.write(to: outurl)
 				} else {
